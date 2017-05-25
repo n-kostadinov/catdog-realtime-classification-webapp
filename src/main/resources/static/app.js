@@ -46,10 +46,11 @@ function showCatDogDTO(unparsed_message) {
 	
 	message = JSON.parse(unparsed_message.body)
 	if (message.resolved) {
-		$("#catdogboard").prepend(preffix + "Image processed by Deep-Cat-Dog" + suffix +
-		preffix + "Image as seen by the Neural Network</td></tr>" + suffix + 
-		preffix + "<img height=\"299\" width=\"299\" src=\"" + message.url + "\"/>" + suffix +
-		preffix + "Label: " + message.label + suffix);
+		$("#catdogboard").prepend(
+		    preffix + "Image processed by Deep-Cat-Dog" + suffix +
+			preffix + "Image as seen by the Neural Network</td></tr>" + suffix + 
+			preffix + "<img height=\"299\" width=\"299\" src=\"" + message.url + "\"/>" + suffix +
+			preffix + "Label: " + message.label + suffix);
 	} else {
 		$("#catdogboard").prepend(preffix + message.content + suffix);
 	}

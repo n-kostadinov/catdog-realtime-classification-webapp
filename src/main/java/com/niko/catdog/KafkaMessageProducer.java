@@ -16,21 +16,23 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
-public class MessageProducer {
+public class KafkaMessageProducer {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private static final String BROKER_ADDRESS = "localhost:9092";
 	private static final String KAFKA_IMAGE_TOPIC = "catdogimage";
-	
+	private static final Properties properties = new Properties();
+	static{
+		properties.put("bootstrap.servers", BROKER_ADDRESS);
+		properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+		properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+	}
+
 	private Producer<String, String> kafkaProducer;
 	
 	@PostConstruct
 	private void initialize() {
-		Properties properties = new Properties();
-		properties.put("bootstrap.servers", BROKER_ADDRESS);
-		properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-		properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 		kafkaProducer = new KafkaProducer<>(properties);
 	}	
 	

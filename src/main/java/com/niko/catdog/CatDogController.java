@@ -13,7 +13,7 @@ public class CatDogController {
 	private static final String MESSAGE_UNABLE_TO_LOAD = "Unable to download image. Check if your url is correct";
 	
 	@Autowired
-	private MessageProducer messageProducer;
+	private KafkaMessageProducer messageProducer;
 	
     @MessageMapping("/usermessage")
     @SendTo("/topic/catdog")
